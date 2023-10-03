@@ -1,3 +1,4 @@
+import 'package:booking_football_schedule/screen/user_info_screen.dart';
 import 'package:booking_football_schedule/screen/welcome_screen.dart';
 import 'package:booking_football_schedule/widget/background_image.dart';
 import 'package:flutter/material.dart';

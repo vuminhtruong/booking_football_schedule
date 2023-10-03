@@ -1,3 +1,4 @@
+import 'package:booking_football_schedule/screen/user_info_screen.dart';
 import 'package:booking_football_schedule/widget/background_image.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
@@ -6,7 +7,8 @@ import '../utils/utils.dart';
 import '../widget/custom_button.dart';
 
 class OtpScreen extends StatefulWidget{
-  const OtpScreen({super.key});
+  const OtpScreen({super.key, required this.phone});
+  final String phone;
 
   @override
   State<OtpScreen> createState() {
@@ -106,6 +108,7 @@ class _OtpScreenState extends State<OtpScreen> {
                         onPressed: () {
                           if (otpCode != null && otpCode!.length == 6) {
                             // xac thuc otp
+                            Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => UserInfoScreen(phone: widget.phone)));
                           } else {
                             showSnackBar(context, "Hãy nhập đủ 6 chữ số");
                           }

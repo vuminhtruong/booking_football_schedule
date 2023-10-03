@@ -44,9 +44,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         height: 100,
                       ),
                     ),
-                    const SizedBox(height: 70),
+                    const SizedBox(height: 25),
                     const Text(
-                      "Đăng ký",
+                      "Đăng ký tài khoản",
                       style: TextStyle(
                         fontSize: 26,
                         fontWeight: FontWeight.bold,
@@ -63,7 +63,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 10),
                     TextFormField(
                       inputFormatters: [LengthLimitingTextInputFormatter(9)],
                       style: const TextStyle(
@@ -93,7 +93,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: Colors.blueAccent),
+                          borderSide:
+                              const BorderSide(color: Colors.blueAccent),
                         ),
                         prefixIcon: Container(
                           padding: const EdgeInsets.all(8),
@@ -110,12 +111,30 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       width: double.infinity,
                       height: 50,
                       child: CustomButton(
-                        text: "Login",
+                        text: "Đăng ký",
                         onPressed: () {
                           // xac thuc OTP
-                          Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => const OtpScreen()));
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (ctx) => OtpScreen(phone: phoneController.text,)));
                         },
                       ),
+                    ),
+                    const SizedBox(height: 10),
+                    const Text(
+                      "Đã có tài khoản?",
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white70,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        backgroundColor: Colors.transparent,
+                      ),
+                      onPressed: () {},
+                      child: const Text('Đăng nhập',style: TextStyle(fontSize: 18),),
                     ),
                   ],
                 ),
