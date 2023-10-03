@@ -1,3 +1,4 @@
+import 'package:booking_football_schedule/screen/otp_screen.dart';
 import 'package:booking_football_schedule/widget/background_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -112,6 +113,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         text: "Login",
                         onPressed: () {
                           // xac thuc OTP
+                          Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => const OtpScreen()));
                         },
                       ),
                     ),
