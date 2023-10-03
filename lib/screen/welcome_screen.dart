@@ -1,3 +1,4 @@
+import 'package:booking_football_schedule/screen/register_screen.dart';
 import 'package:booking_football_schedule/widget/background_image.dart';
 import 'package:booking_football_schedule/widget/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -62,6 +63,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               // xem người dùng còn đăng nhập hay không
                               // nếu còn chuyển hướng đến màn hình Home
                               // nếu không chuyển đến màn hình đăng nhập
+                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (ctx) => const RegisterScreen()));
                             },
                           ),
                         ),

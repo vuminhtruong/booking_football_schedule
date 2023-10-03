@@ -1,4 +1,5 @@
 import 'package:booking_football_schedule/screen/welcome_screen.dart';
+import 'package:booking_football_schedule/widget/background_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -22,6 +23,6 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       home: WelcomeScreen(),
-    );
+      );
   }
 }
