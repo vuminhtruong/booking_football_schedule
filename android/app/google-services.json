@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "454663992177",
+    "project_id": "main-app-e9209",
+    "storage_bucket": "main-app-e9209.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:454663992177:android:2ec46fbbca0a17f75ebcd0",
+        "android_client_info": {
+          "package_name": "com.example.booking_football_schedule"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEmwoqpyGVJFOE1mfSEwIcky51jEdc_RA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:454663992177:android:5955db6be3af5c215ebcd0",
+        "android_client_info": {
+          "package_name": "com.example.phoneauth"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEmwoqpyGVJFOE1mfSEwIcky51jEdc_RA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
