@@ -1,14 +1,18 @@
 import 'package:booking_football_schedule/screen/user_info_screen.dart';
 import 'package:booking_football_schedule/widget/background_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 
 import '../utils/utils.dart';
 import '../widget/custom_button.dart';
 
-class OtpScreen extends StatefulWidget{
-  const OtpScreen({super.key, required this.phone});
+class OtpScreen extends StatefulWidget {
+  const OtpScreen(
+      {super.key, required this.phone, required this.verificationId});
+
   final String phone;
+  final String verificationId;
 
   @override
   State<OtpScreen> createState() {
@@ -17,11 +21,49 @@ class OtpScreen extends StatefulWidget{
 }
 
 class _OtpScreenState extends State<OtpScreen> {
+  var isLoading = false;
   String? otpCode;
+  FirebaseAuth auth = FirebaseAuth.instance;
+
+  void verifyOtp(String verificationId, String userOtp) async {
+    try {
+      PhoneAuthCredential credential = PhoneAuthProvider.credential(
+          verificationId: verificationId, smsCode: userOtp);
+      User? user = (await auth.signInWithCredential(credential)).user;
+
+      if(user != null) {
+        if(!context.mounted) {
+          return;
+        }
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (ctx) => UserInfoScreen(phone: widget.phone)));
+      }
+    } on FirebaseAuthException catch (e) {
+      if(!context.mounted) {
+        return;
+      }
+      showSnackBar(context, e.message.toString());
+    }
+  }
+
+  void _login() {
+    if(otpCode != null) {
+      setState(() {
+        isLoading = true;
+      });
+      verifyOtp(widget.verificationId, otpCode!);
+    } else {
+      showSnackBar(context, "Mã OTP không hợp lệ");
+    }
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final isLoading = false;
 
     return Stack(
       children: [
@@ -30,11 +72,10 @@ class _OtpScreenState extends State<OtpScreen> {
           resizeToAvoidBottomInset: false,
           backgroundColor: Colors.transparent,
           body: SafeArea(
-            child: isLoading ? const Center(
-              child: CircularProgressIndicator(),
-            ) : Center(
+            child: Center(
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 25,horizontal: 30),
+                padding: const EdgeInsets.symmetric(
+                    vertical: 25, horizontal: 30),
                 child: Column(
                   children: [
                     Align(
@@ -101,18 +142,14 @@ class _OtpScreenState extends State<OtpScreen> {
                     ),
                     const SizedBox(height: 25),
                     SizedBox(
-                      width: MediaQuery.of(context).size.width,
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width,
                       height: 50,
-                      child: CustomButton(
+                      child: isLoading ? const CircularProgressIndicator() : CustomButton(
                         text: "Gửi",
-                        onPressed: () {
-                          if (otpCode != null && otpCode!.length == 6) {
-                            // xac thuc otp
-                            Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => UserInfoScreen(phone: widget.phone)));
-                          } else {
-                            showSnackBar(context, "Hãy nhập đủ 6 chữ số");
-                          }
-                        },
+                        onPressed: _login,
                       ),
                     ),
                   ],
@@ -124,5 +161,5 @@ class _OtpScreenState extends State<OtpScreen> {
       ],
     );
   }
-  
+
 }
