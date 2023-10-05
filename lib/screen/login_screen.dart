@@ -1,8 +1,12 @@
+import 'package:booking_football_schedule/screen/home_screen.dart';
 import 'package:booking_football_schedule/widget/background_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../widget/custom_button.dart';
+
+final _firebaseAuth = FirebaseAuth.instance;
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -16,6 +20,33 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final passwordController = TextEditingController();
   final phoneController = TextEditingController();
+
+  var _isAuthenticating = false;
+
+  void _login() async {
+    setState(() {
+      _isAuthenticating = true;
+    });
+
+    try {
+      final userCredentials = await _firebaseAuth.signInWithEmailAndPassword(
+          email: '${phoneController.text}@football.com', password: passwordController.text);
+      if(!context.mounted) {
+        return;
+      }
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (ctx) => const HomeScreen()));
+    } on FirebaseAuthException catch (error) {
+      if (!context.mounted) {
+        return;
+      }
+      ScaffoldMessenger.of(context).clearSnackBars();
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(error.message ?? 'Authentication failed.')));
+      setState(() {
+        _isAuthenticating = false;
+      });
+    }
+  }
 
   @override
   void dispose() {
@@ -66,7 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 10),
                   TextFormField(
-                    inputFormatters: [LengthLimitingTextInputFormatter(9)],
+                    inputFormatters: [LengthLimitingTextInputFormatter(11)],
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 22,
@@ -103,7 +134,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           color: Colors.white60,
                         ),
                       ),
-                      prefixText: '+84',
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -119,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         passwordController.text = value;
                       });
                     },
-                    keyboardType: TextInputType.text,
+                    keyboardType: TextInputType.number,
                     obscureText: true,
                     decoration: InputDecoration(
                       labelText: 'Mật khẩu',
@@ -148,12 +178,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  SizedBox(
+                  _isAuthenticating ? const CircularProgressIndicator() : SizedBox(
                     width: double.infinity,
                     height: 50,
                     child: CustomButton(
                       text: "Đăng nhập",
-                      onPressed: () {},
+                      onPressed: _login,
                     ),
                   ),
                   const SizedBox(height: 10),

@@ -1,8 +1,5 @@
-import 'dart:io';
-import 'dart:math';
-
+import 'package:booking_football_schedule/screen/welcome_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 void showSnackBar(BuildContext context, String content) {
   ScaffoldMessenger.of(context).showSnackBar(
@@ -10,6 +7,27 @@ void showSnackBar(BuildContext context, String content) {
       content: Text(content),
     ),
   );
+}
+
+void showAlertDialog(BuildContext context,String content) {
+  Widget okButton = TextButton(
+    child: const Text("OK"),
+    onPressed: () {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (ctx) => const WelcomeScreen()));
+    },
+  );
+
+  AlertDialog alert = AlertDialog(
+    title: const Text("Lỗi"),
+    content: Text(content),
+    actions: [
+      okButton,
+    ],
+  );
+  
+  showDialog(context: context, builder: (BuildContext context) {
+    return alert;
+  });
 }
 
 // Future<File?> pickImage(BuildContext context) async {
@@ -37,17 +55,23 @@ Widget textField({
   required int maxLines,
   required TextEditingController? controller,
   required bool enable,
+  required bool obscureText,
+  required String? Function(String?)? validator,
   required String? initialValue,
 }) {
   return Padding(
     padding: const EdgeInsets.only(bottom: 20),
     child: TextFormField(
       initialValue: initialValue,
+      obscureText: obscureText,
+      validator: validator,
       style: const TextStyle(
         fontSize: 20,
         color: Colors.black,
       ),
       cursorColor: Colors.black,
+      enableSuggestions: false,
+      autocorrect: false,
       controller: controller,
       keyboardType: inputType,
       maxLines: maxLines,

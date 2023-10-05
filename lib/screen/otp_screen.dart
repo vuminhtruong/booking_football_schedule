@@ -41,6 +41,7 @@ class _OtpScreenState extends State<OtpScreen> {
       if(!context.mounted) {
         return;
       }
+      ScaffoldMessenger.of(context).clearSnackBars();
       showSnackBar(context, e.message.toString());
     }
   }
@@ -52,6 +53,7 @@ class _OtpScreenState extends State<OtpScreen> {
       });
       verifyOtp(widget.verificationId, otpCode!);
     } else {
+      ScaffoldMessenger.of(context).clearSnackBars();
       showSnackBar(context, "Mã OTP không hợp lệ");
     }
   }
@@ -141,13 +143,13 @@ class _OtpScreenState extends State<OtpScreen> {
                       },
                     ),
                     const SizedBox(height: 25),
-                    SizedBox(
+                    isLoading ? const CircularProgressIndicator() : SizedBox(
                       width: MediaQuery
                           .of(context)
                           .size
                           .width,
                       height: 50,
-                      child: isLoading ? const CircularProgressIndicator() : CustomButton(
+                      child: CustomButton(
                         text: "Gửi",
                         onPressed: _login,
                       ),

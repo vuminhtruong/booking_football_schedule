@@ -24,12 +24,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
     FirebaseAuth auth = FirebaseAuth.instance;
 
     await auth.verifyPhoneNumber(
-      phoneNumber: phoneNumber,
+      //phoneNumber: phoneNumber,
+      phoneNumber: '+1 650-650-1234',
       verificationCompleted: (PhoneAuthCredential credential) async {
         await auth.signInWithCredential(credential);
       },
       verificationFailed: (FirebaseAuthException exception) {
-        print(exception.message);
+        print('Xảy ra lỗi: ${exception.message}');
       },
       codeSent: (String verificationId, int? resendToken) async {
         String smsCode = '';
@@ -41,11 +42,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
             context,
             MaterialPageRoute(
                 builder: (ctx) => OtpScreen(
-                      phone: phoneNumber,
+                      // phone: phoneNumber,
+                      phone: '06506501234',
                       verificationId: verificationId,
                     )));
       },
       codeAutoRetrievalTimeout: (String verificationId) {
+        ScaffoldMessenger.of(context).clearSnackBars();
         showSnackBar(
             context, 'Thời gian xác thực mã OTP đã kết thúc.Vui lòng thử lại');
       },
@@ -55,6 +58,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   void _userLogin() async {
     String phoneNumber = phoneController.text;
     if (phoneNumber.length != 9) {
+      ScaffoldMessenger.of(context).clearSnackBars();
       showSnackBar(context, 'Vui lòng nhập số điện thoại hợp lệ');
     } else {
       signInWithPhoneNumber("+84$phoneNumber");
