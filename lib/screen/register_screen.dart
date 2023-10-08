@@ -30,7 +30,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
         await auth.signInWithCredential(credential);
       },
       verificationFailed: (FirebaseAuthException exception) {
-        print('Xảy ra lỗi: ${exception.message}');
+        ScaffoldMessenger.of(context).clearSnackBars();
+        showSnackBar(context, 'Lỗi đăng ký,số điện thoại đã được sử dụng hoặc không hợp lệ,vui lòng liên hệ với Admin');
       },
       codeSent: (String verificationId, int? resendToken) async {
         String smsCode = '';
@@ -59,7 +60,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     String phoneNumber = phoneController.text;
     if (phoneNumber.length != 9) {
       ScaffoldMessenger.of(context).clearSnackBars();
-      showSnackBar(context, 'Vui lòng nhập số điện thoại hợp lệ');
+      showSnackBar(context, 'Số điện thoại chưa đúng');
     } else {
       signInWithPhoneNumber("+84$phoneNumber");
     }

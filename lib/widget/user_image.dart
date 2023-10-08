@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 
 class UserImage extends StatefulWidget {
   const UserImage({super.key, required this.onPickImage});
+
   final void Function(File pickedImage) onPickImage;
 
   @override
@@ -35,21 +36,26 @@ class _UserImageState extends State<UserImage> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CircleAvatar(
-          foregroundImage:
-              _pickedImageFile != null ? FileImage(_pickedImageFile!) : null,
-          radius: 65,
-          backgroundColor: Colors.white60,
-        ),
+        _pickedImageFile != null
+            ? CircleAvatar(
+                foregroundImage: FileImage(_pickedImageFile!),
+                radius: 65,
+                backgroundColor: Colors.white60,
+              )
+            : const CircleAvatar(
+                foregroundImage: AssetImage('assets/images/profile.png'),
+                radius: 65,
+                backgroundColor: Colors.white60,
+              ),
         TextButton.icon(
           onPressed: _pickImage,
-          icon: const Icon(Icons.add_a_photo,color: Colors.white60,),
+          icon: const Icon(
+            Icons.add_a_photo,
+            color: Colors.white60,
+          ),
           label: const Text(
             'Thêm ảnh',
-            style: TextStyle(
-              color: Colors.white60,
-              fontSize: 16
-            ),
+            style: TextStyle(color: Colors.lightBlue, fontSize: 16),
           ),
         )
       ],

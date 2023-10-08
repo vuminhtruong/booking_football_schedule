@@ -1,6 +1,7 @@
-import 'package:booking_football_schedule/screen/user_info_screen.dart';
+import 'package:booking_football_schedule/helper/splash.dart';
+import 'package:booking_football_schedule/screen/home_screen.dart';
 import 'package:booking_football_schedule/screen/welcome_screen.dart';
-import 'package:booking_football_schedule/widget/background_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -29,8 +30,19 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: WelcomeScreen(),
-      );
+    return MaterialApp(
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (ctx,snapshot) {
+          if(snapshot.connectionState == ConnectionState.waiting) {
+            return const SplashScreen();
+          }
+          if(snapshot.hasData) {
+            return const HomeScreen();
+          }
+          return const WelcomeScreen();
+        },
+      ),
+    );
   }
 }

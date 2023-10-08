@@ -1,4 +1,5 @@
 import 'package:booking_football_schedule/screen/home_screen.dart';
+import 'package:booking_football_schedule/utils/utils.dart';
 import 'package:booking_football_schedule/widget/background_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -40,8 +41,12 @@ class _LoginScreenState extends State<LoginScreen> {
         return;
       }
       ScaffoldMessenger.of(context).clearSnackBars();
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(error.message ?? 'Authentication failed.')));
+      if(error.code == 'INVALID_LOGIN_CREDENTIALS') {
+        showSnackBar(context, 'Số điện thoại hoặc mật khẩu không đúng,vui lòng thử lại');
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(error.message ?? 'Authentication failed.')));
+      }
       setState(() {
         _isAuthenticating = false;
       });
@@ -138,6 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 20),
                   TextFormField(
+                    inputFormatters: [LengthLimitingTextInputFormatter(6)],
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 22,
@@ -171,7 +177,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       prefixIcon: Container(
                         padding: const EdgeInsets.all(8),
                         child: const Icon(
-                          Icons.phone,
+                          Icons.password,
                           color: Colors.white60,
                         ),
                       ),

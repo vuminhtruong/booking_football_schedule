@@ -44,6 +44,7 @@ dependencies:
   flutter_riverpod: ^2.4.2
   firebase_storage: ^11.2.8
   cloud_firestore: ^4.9.3
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:

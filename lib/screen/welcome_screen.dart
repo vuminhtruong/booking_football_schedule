@@ -60,9 +60,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           child: CustomButton(
                             text: 'Bắt Đầu',
                             onPressed: () {
-                              // xem người dùng còn đăng nhập hay không
-                              // nếu còn chuyển hướng đến màn hình Home
-                              // nếu không chuyển đến màn hình đăng nhập
                               Navigator.pushReplacement(context, MaterialPageRoute(builder: (ctx) => const RegisterScreen()));
                             },
                           ),

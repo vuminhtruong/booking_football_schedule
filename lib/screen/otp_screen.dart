@@ -42,7 +42,17 @@ class _OtpScreenState extends State<OtpScreen> {
         return;
       }
       ScaffoldMessenger.of(context).clearSnackBars();
-      showSnackBar(context, e.message.toString());
+      if(e.code == 'invalid-verification-code') {
+        showSnackBar(context, 'Mã OTP không đúng,vui lòng thử lại');
+      } else if(e.code == 'invalid-credential') {
+        showAlertDialog(context, 'Thời gian xác thực đã hết,vui lòng thử lại sau');
+      }
+      else {
+        showSnackBar(context, 'Lỗi trong quá trình gửi mã OTP.Vui lòng thử lại sau');
+      }
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 

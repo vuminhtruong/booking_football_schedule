@@ -51,7 +51,8 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
       });
       final userCredentials =
           await _firebaseAuth.createUserWithEmailAndPassword(
-              email: '${phoneController.text}@football.com', password: passwordController.text);
+              email: '${phoneController.text}@football.com',
+              password: passwordController.text);
 
       final storageRef = FirebaseStorage.instance
           .ref()
@@ -68,19 +69,19 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
         'fullName': fullNameController.text,
         'image_url': imageUrl,
       });
-      if(!context.mounted){
+      if (!context.mounted) {
         return;
       }
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (ctx) => const HomeScreen()));
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (ctx) => const HomeScreen()));
     } on FirebaseAuthException catch (error) {
       if (error.code == 'email-already-in-use') {
         showAlertDialog(
             context, 'Số điện thoại đã được sử dụng.Vui lòng sử dụng số khác');
+      } else {
+        showAlertDialog(context,
+            'Lỗi trong quá trình đăng ký thông tin người dùng.Vui lòng thử lại sau');
       }
-      showAlertDialog(
-          context,
-          error.message ??
-              'Lỗi trong quá trình đăng ký thông tin người dùng.Vui lòng thử lại sau');
       setState(() {
         _isLoading = false;
       });
