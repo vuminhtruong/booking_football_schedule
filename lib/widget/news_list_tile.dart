@@ -19,7 +19,7 @@ class _NewsListTileState extends State<NewsListTile> {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const DetailsScreen(),
+              builder: (context) => DetailsScreen(widget.data),
             ));
       },
       child: Container(
@@ -36,7 +36,7 @@ class _NewsListTileState extends State<NewsListTile> {
             Flexible(
               flex: 3,
               child: Hero(
-                tag: "${widget.data.title}",
+                tag: "${widget.data.id}",
                 child: Container(
                   height: 100.0,
                   decoration: BoxDecoration(

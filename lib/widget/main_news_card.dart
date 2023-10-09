@@ -1,5 +1,9 @@
 import 'package:booking_football_schedule/models/news_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+import '../screen/details_screen.dart';
 
 class MainNewsCard extends StatefulWidget {
   MainNewsCard(this.data,{Key? key}) : super(key: key);
@@ -15,12 +19,18 @@ class _MainNewsCardState extends State<MainNewsCard> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => DetailsScreen(widget.data),
+            ));
+      },
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
           image: DecorationImage(
-            fit: BoxFit.fill,
+            fit: BoxFit.cover,
             image: NetworkImage(widget.data.urlToImage!),
           )
         ),
@@ -48,7 +58,7 @@ class _MainNewsCardState extends State<MainNewsCard> {
               ),
               const SizedBox(height: 8,),
               Text(
-                widget.data.author!,
+                'Ngày đăng: ${DateFormat('dd/MM/yyyy').format(widget.data.date!.toDate())}',
                 style: const TextStyle(
                   color: Colors.white54,
                   fontSize: 14,

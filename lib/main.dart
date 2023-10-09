@@ -1,4 +1,4 @@
-import 'package:booking_football_schedule/helper/splash.dart';
+import 'package:booking_football_schedule/widget/splash.dart';
 import 'package:booking_football_schedule/screen/home_screen.dart';
 import 'package:booking_football_schedule/screen/welcome_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';

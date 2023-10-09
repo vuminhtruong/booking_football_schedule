@@ -1,3 +1,4 @@
+import 'package:booking_football_schedule/helper/news_helper.dart';
 import 'package:booking_football_schedule/models/news_model.dart';
 import 'package:booking_football_schedule/widget/main_news_card.dart';
 import 'package:booking_football_schedule/widget/news_list_tile.dart';
@@ -14,21 +15,53 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final NewsHelper newsHelper = NewsHelper();
+  List<NewsData> mainNewsList = [];
+  List<NewsData> sideNewsList = [];
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadNewsData();
+  }
+
+  Future<void> loadNewsData() async {
+    List<NewsData> fetchedMainNewsList = await newsHelper.getNewsDataList('main_news');
+    List<NewsData> fetchedSideNewsList = await newsHelper.getNewsDataList('side_news');
+
+    if(!mounted) {
+      return;
+    }
+
+    setState(() {
+      mainNewsList = fetchedMainNewsList;
+      sideNewsList = fetchedSideNewsList;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
+        backgroundColor: Colors.black,
         title: const Text(
           "Trang chủ",
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.white),
         ),
         actions: [
           IconButton(
               onPressed: () {},
               icon: const Icon(
                 Icons.person,
-                color: Colors.black,
+                color: Colors.white,
               ))
         ],
       ),
@@ -47,8 +80,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 20,
               ),
               CarouselSlider.builder(
-                  itemCount: NewsData.breakingNewsData.length,
-                  itemBuilder: (context, index, id) => MainNewsCard(NewsData.breakingNewsData[index]),
+                  itemCount: mainNewsList.length,
+                  itemBuilder: (context, index, id) => MainNewsCard(mainNewsList[index]),
                   options: CarouselOptions(
                     aspectRatio: 16/9,
                     enableInfiniteScroll: false,
@@ -66,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const SizedBox(height: 16,),
               Column(
-                children: NewsData.recentNewsData.map((e) => NewsListTile(e)).toList(),
+                children: sideNewsList.map((e) => NewsListTile(e)).toList(),
               ),
             ],
           ),
