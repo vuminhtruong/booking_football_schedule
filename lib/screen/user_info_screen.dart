@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:booking_football_schedule/screen/home_screen.dart';
+import 'package:booking_football_schedule/screen/main_screen.dart';
 import 'package:booking_football_schedule/widget/background_image.dart';
 import 'package:booking_football_schedule/widget/user_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -73,7 +73,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
         return;
       }
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (ctx) => const HomeScreen()));
+          context, MaterialPageRoute(builder: (ctx) => const MainScreen()));
     } on FirebaseAuthException catch (error) {
       if (error.code == 'email-already-in-use') {
         showAlertDialog(

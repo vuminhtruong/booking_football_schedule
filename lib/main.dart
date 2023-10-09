@@ -1,5 +1,5 @@
 import 'package:booking_football_schedule/widget/splash.dart';
-import 'package:booking_football_schedule/screen/home_screen.dart';
+import 'package:booking_football_schedule/screen/main_screen.dart';
 import 'package:booking_football_schedule/screen/welcome_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -38,7 +38,7 @@ class App extends StatelessWidget {
             return const SplashScreen();
           }
           if(snapshot.hasData) {
-            return const HomeScreen();
+            return const MainScreen();
           }
           return const WelcomeScreen();
         },

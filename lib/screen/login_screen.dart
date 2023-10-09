@@ -1,4 +1,4 @@
-import 'package:booking_football_schedule/screen/home_screen.dart';
+import 'package:booking_football_schedule/screen/main_screen.dart';
 import 'package:booking_football_schedule/utils/utils.dart';
 import 'package:booking_football_schedule/widget/background_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -35,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
       if(!context.mounted) {
         return;
       }
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (ctx) => const HomeScreen()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (ctx) => const MainScreen()));
     } on FirebaseAuthException catch (error) {
       if (!context.mounted) {
         return;
