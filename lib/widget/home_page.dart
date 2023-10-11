@@ -71,6 +71,10 @@ class _HomePage extends State<HomePage> {
                     itemBuilder: (context, index, id) =>
                         MainNewsCard(mainNewsList[index]),
                     options: CarouselOptions(
+                      autoPlay: true,
+                      autoPlayInterval: const Duration(seconds: 3),
+                      autoPlayAnimationDuration: const Duration(milliseconds: 800),
+                      autoPlayCurve: Curves.fastOutSlowIn,
                       aspectRatio: 16 / 9,
                       enableInfiniteScroll: false,
                       enlargeCenterPage: true,

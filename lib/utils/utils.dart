@@ -1,5 +1,6 @@
 import 'package:booking_football_schedule/screen/welcome_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void showSnackBar(BuildContext context, String content) {
   ScaffoldMessenger.of(context).showSnackBar(
@@ -30,23 +31,14 @@ void showAlertDialog(BuildContext context,String content) {
   });
 }
 
-// Future<File?> pickImage(BuildContext context) async {
-//   File? image;
-//
-//   try {
-//     final pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
-//     if(pickedImage != null) {
-//       image = File(pickedImage.path);
-//     }
-//   } catch (e) {
-//     if(!context.mounted) {
-//       return null;
-//     }
-//     showSnackBar(context, e.toString());
-//   }
-//
-//   return image;
-// }
+TextStyle get subHeadingStyle{
+  return GoogleFonts.lato(
+    textStyle: const TextStyle(
+      fontSize: 20,
+      fontWeight: FontWeight.bold,
+    )
+  );
+}
 
 Widget textField({
   required String? hintText,
