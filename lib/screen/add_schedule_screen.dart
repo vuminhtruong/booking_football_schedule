@@ -1,3 +1,4 @@
+import 'package:booking_football_schedule/helper/update_match_helper.dart';
 import 'package:booking_football_schedule/utils/utils.dart';
 import 'package:booking_football_schedule/widget/custom_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,10 +9,11 @@ import 'package:intl/intl.dart';
 import '../widget/input_field.dart';
 
 class AddScheduleScreen extends StatefulWidget {
-  const AddScheduleScreen({super.key, required this.date, required this.time});
+  const AddScheduleScreen({super.key, required this.date, required this.time, required this.team1});
 
   final DateTime date;
   final String time;
+  final String? team1;
 
   @override
   State<AddScheduleScreen> createState() {
@@ -34,6 +36,8 @@ class _AddScheduleScreenState extends State<AddScheduleScreen> {
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser!;
     late String? phone;
+    final UpdateMatchHelper updateMatchHelper = UpdateMatchHelper();
+    final bool matchEmpty = widget.team1!.isEmpty ? true : false;
 
     for (var userInfo in user.providerData) {
       if (userInfo.providerId == "phone") {
@@ -78,6 +82,16 @@ class _AddScheduleScreenState extends State<AddScheduleScreen> {
                   fontWeight: FontWeight.bold,
                 )),
               ),
+              const SizedBox(height: 8,),
+              Text(
+                'Quý khách lưu ý,vui lòng nhập chính xác tên đội bóng của mình,không nên nhập tên quá dài cũng như quá vắn tắt,đảm bảo thời gian thi đấu chính xác,nếu muốn thay đổi thông tin hay hủy kèo vui lòng liên hệ với quản lý sân vận động',
+                style: GoogleFonts.oswald(
+                    textStyle: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.normal,
+                    )),
+                textAlign: TextAlign.center,
+              ),
               InputField(
                 title: 'Số điện thoại',
                 initialValue: phone,
@@ -118,8 +132,15 @@ class _AddScheduleScreenState extends State<AddScheduleScreen> {
                 const Text('Tôi xác nhận thông tin là hoàn toàn chính xác'),
               ],),
               CustomButton(text: "Xác nhận", onPressed: () {
-                if(!isAgreed) {
+                if(_teamController.text.isEmpty) {
+                  showSnackBar(context, 'Vui lòng nhập tên đội bóng');
+                } else if(!isAgreed) {
                   showSnackBar(context, 'Vui lòng xác nhận thông tin chính xác');
+                } else {
+                  updateMatchHelper.updateMatch(
+                      DateFormat('yyyy-MM-dd').format(widget.date), widget.time,
+                      matchEmpty, _teamController.text);
+                  Navigator.of(context).pop();
                 }
               }),
             ],

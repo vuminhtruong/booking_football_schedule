@@ -1,7 +1,7 @@
-import 'package:booking_football_schedule/widget/booking_page.dart';
-import 'package:booking_football_schedule/widget/chat_page.dart';
-import 'package:booking_football_schedule/widget/home_page.dart';
-import 'package:booking_football_schedule/widget/player_page.dart';
+import 'package:booking_football_schedule/page/booking_page.dart';
+import 'package:booking_football_schedule/page/chat_page.dart';
+import 'package:booking_football_schedule/page/home_page.dart';
+import 'package:booking_football_schedule/page/player_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 

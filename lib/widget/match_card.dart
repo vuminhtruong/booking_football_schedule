@@ -56,7 +56,7 @@ class MatchCard extends StatelessWidget {
           if(isInternal || team2!.isNotEmpty) {
             return;
           }
-          Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => AddScheduleScreen(date: date,time: time,)));
+          Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => AddScheduleScreen(date: date,time: time, team1: team1,)));
         },
         child: Container(
           key: ObjectKey(idMatch),

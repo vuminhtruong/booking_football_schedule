@@ -55,7 +55,28 @@ class _BookingPageState extends ConsumerState<BookingPage> {
                     const Text('Hôm nay'),
                   ],
                 ),
-                CustomButton(text: '+ Đặt lịch', onPressed: () {}),
+                CustomButton(
+                  text: '+ Yêu cầu',
+                  onPressed: () => showDialog<String>(
+                    context: context,
+                    builder: (BuildContext context) => AlertDialog(
+                      title: const Text('Thông báo'),
+                      content: const Text('Mục này dành cho cầu thủ muốn thi đấu nhưng chưa có đội bóng,vui lòng bỏ qua nếu bạn không có nhu cầu'),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: const Text('Bỏ qua'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+
+                          },
+                          child: const Text('Tiếp tục'),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
             const SizedBox(
@@ -96,33 +117,15 @@ class _BookingPageState extends ConsumerState<BookingPage> {
             Column(
               children: matches
                   .map((match) => MatchCard(
-                idMatch: match.idMatch,
-                team1: match.team1,
-                team2: match.team2,
-                time: DateFormat.Hm().format(match.time.toDate()),
-                isInternal: match.isInternal,
-                date: _selectedDate,
-              ))
+                        idMatch: match.idMatch,
+                        team1: match.team1,
+                        team2: match.team2,
+                        time: DateFormat.Hm().format(match.time.toDate()),
+                        isInternal: match.isInternal,
+                        date: _selectedDate,
+                      ))
                   .toList(),
             ),
-            // FutureBuilder(
-            //   future: _matchesFuture,
-            //   builder: (ctx, snapshot) =>
-            //       snapshot.connectionState == ConnectionState.waiting
-            //           ? const CircularProgressIndicator()
-            //           : Column(
-            //               children: matches
-            //                   .map((match) => MatchCard(
-            //                         idMatch: match.idMatch,
-            //                         team1: match.team1,
-            //                         team2: match.team2,
-            //                         time: DateFormat.Hm()
-            //                             .format(match.time.toDate()),
-            //                         isInternal: match.isInternal,
-            //                       ))
-            //                   .toList(),
-            //             ),
-            // ),
           ],
         ),
       ),

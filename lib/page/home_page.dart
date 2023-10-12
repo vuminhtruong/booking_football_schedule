@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 import '../helper/news_helper.dart';
 import '../models/news_model.dart';
-import 'main_news_card.dart';
-import 'news_list_tile.dart';
+import '../widget/main_news_card.dart';
+import '../widget/news_list_tile.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
