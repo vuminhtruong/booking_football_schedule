@@ -35,7 +35,8 @@ class _MainScreenState extends State<MainScreen> {
               icon: const Icon(
                 Icons.person,
                 color: Colors.white,
-              ))
+              )
+          )
         ],
       ),
       body: _widgetOptions[_currentPageIndex],
