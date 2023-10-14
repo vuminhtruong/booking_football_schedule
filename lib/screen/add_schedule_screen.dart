@@ -95,7 +95,7 @@ class _AddScheduleScreenState extends State<AddScheduleScreen> {
               InputField(
                 title: 'Số điện thoại',
                 initialValue: phone,
-                enabled: false,
+                enabled: phone == null ? true : false,
               ),
               InputField(
                 title: 'Tên đội',
@@ -135,7 +135,7 @@ class _AddScheduleScreenState extends State<AddScheduleScreen> {
                 if(_teamController.text.isEmpty) {
                   showSnackBar(context, 'Vui lòng nhập tên đội bóng');
                 } else if(!isAgreed) {
-                  showSnackBar(context, 'Vui lòng xác nhận thông tin chính xác');
+                  showSnackBar(context, 'Vui lòng xác nhận thông tin bạn cung cấp là chính xác');
                 } else {
                   updateMatchHelper.updateMatch(
                       DateFormat('yyyy-MM-dd').format(widget.date), widget.time,

@@ -54,17 +54,16 @@ class InputField extends StatelessWidget {
                       decoration: InputDecoration(
                         hintText: hint,
                         hintStyle: enabled ? const TextStyle(color: Color.fromARGB(
-                            152, 9, 185, 229)) : const TextStyle(color: Colors.grey),
-                        // hintStyle: subTitleStyle,
+                            152, 9, 185, 229),fontSize: 20) : const TextStyle(color: Colors.grey,fontSize: 20),
                         enabledBorder: const UnderlineInputBorder(
                             borderSide: BorderSide(
                               // ignore: deprecated_member_use
-                              color: Colors.grey,
+                              color: Colors.transparent,
                             )),
                         focusedBorder: const UnderlineInputBorder(
                             borderSide: BorderSide(
                               // ignore: deprecated_member_use
-                              color: Colors.black12,
+                              color: Colors.transparent,
                               width: 0,
                             )),
                       ),

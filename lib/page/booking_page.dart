@@ -1,4 +1,5 @@
 import 'package:booking_football_schedule/provider/match_provider.dart';
+import 'package:booking_football_schedule/screen/individual_screen.dart';
 import 'package:booking_football_schedule/utils/utils.dart';
 import 'package:booking_football_schedule/widget/custom_button.dart';
 import 'package:booking_football_schedule/widget/match_card.dart';
@@ -57,25 +58,9 @@ class _BookingPageState extends ConsumerState<BookingPage> {
                 ),
                 CustomButton(
                   text: '+ Yêu cầu',
-                  onPressed: () => showDialog<String>(
-                    context: context,
-                    builder: (BuildContext context) => AlertDialog(
-                      title: const Text('Thông báo'),
-                      content: const Text('Mục này dành cho cầu thủ muốn thi đấu nhưng chưa có đội bóng,vui lòng bỏ qua nếu bạn không có nhu cầu'),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () => Navigator.of(context).pop(),
-                          child: const Text('Bỏ qua'),
-                        ),
-                        TextButton(
-                          onPressed: () {
-
-                          },
-                          child: const Text('Tiếp tục'),
-                        ),
-                      ],
-                    ),
-                  ),
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => const IndividualScreen()));
+                  }
                 ),
               ],
             ),
