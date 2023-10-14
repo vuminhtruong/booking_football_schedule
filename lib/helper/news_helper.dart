@@ -17,7 +17,7 @@ class NewsHelper {
         newsList.add(newsData);
       }
     } catch (e) {
-      print('Lỗi trong quá trình lấy dữ liệu: $e');
+      print('Lỗi trong quá trình lấy dữ liệu của news: $e');
     }
 
     return newsList;

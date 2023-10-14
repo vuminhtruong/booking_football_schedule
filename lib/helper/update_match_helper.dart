@@ -16,7 +16,7 @@ class UpdateMatchHelper {
       await _firestore.collection(collectionName).doc(
           documentName).update({field: newValue});
     } catch (e) {
-      print('Lỗi trong quá trình cập nhật dữ liệu: $e');
+      print('Lỗi trong quá trình cập nhật dữ liệu match: $e');
     }
   }
 

@@ -11,16 +11,16 @@ class MatchesHelper {
       QuerySnapshot querySnapshot = await _firestore.collection(date).get();
       for (var element in querySnapshot.docs) {
         var data = element.data() as Map<String, dynamic>;
-        var matchesData = MatchData(
+        var matchData = MatchData(
             idMatch: data['idMatch'],
             team1: data['team1'],
             team2: data['team2'],
             time: data['time'],
             isInternal: data['is_Internal']);
-        matchesList.add(matchesData);
+        matchesList.add(matchData);
       }
     } catch (e) {
-      print('Lỗi trong quá trình lấy dữ liệu: $e');
+      print('Lỗi trong quá trình lấy dữ liệu date: $e');
     }
 
     return matchesList;
