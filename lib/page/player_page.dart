@@ -15,6 +15,7 @@ class _PlayerPageState extends State<PlayerPage> {
   int selectedButtonIndex = 0;
   String selectedField = 'goal';
   List<String> listField = ['goal', 'assist', 'tackle', 'save'];
+  List<String> images = ['ball','football-shoes','defence','goalie'];
 
   void selectButton(int index) async {
     setState(() {
@@ -176,6 +177,8 @@ class _PlayerPageState extends State<PlayerPage> {
                           break;
                       }
                       return Card(
+                        margin: const EdgeInsets.symmetric(vertical: 8),
+                        elevation: 6,
                         child: ListTile(
                           leading: playerDataList[index].image != null
                               ? ClipOval(
@@ -192,7 +195,7 @@ class _PlayerPageState extends State<PlayerPage> {
                                 height: 50,
                                 fit: BoxFit.cover,
                               )),
-                          title: Text(playerDataList[index].name,style: const TextStyle(fontWeight: FontWeight.bold),),
+                          title: Text(playerDataList[index].name,style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
                           subtitle: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -206,9 +209,9 @@ class _PlayerPageState extends State<PlayerPage> {
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Text(target.toString(), style: const TextStyle(fontSize: 18)),
-                                const SizedBox(width: 4),
-                                const Icon(Icons.sports_soccer),
+                                Text(target.toString(), style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 20)),
+                                const SizedBox(width: 6),
+                                Image.asset('assets/images/${images[selectedButtonIndex]}.png',width: 20,height: 20,),
                               ],
                             ),
                           ),

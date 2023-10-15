@@ -32,18 +32,28 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: StreamBuilder(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (ctx,snapshot) {
-          if(snapshot.connectionState == ConnectionState.waiting) {
-            return const SplashScreen();
-          }
-          if(snapshot.hasData) {
-            return const MainScreen();
-          }
-          return const WelcomeScreen();
-        },
-      ),
-    );
+        home: WillPopScope(
+            onWillPop: () async {
+              return false;
+            },
+            child: StreamBuilder(
+              stream: FirebaseAuth.instance.authStateChanges(),
+              builder: (ctx, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const SplashScreen();
+                }
+                if (snapshot.hasData) {
+                  final user = snapshot.data;
+                  if (user != null) {
+                    print(user.uid);
+                    if (user.providerData
+                        .any((userInfo) => userInfo.providerId == 'password')) {
+                      return const MainScreen();
+                    }
+                  }
+                }
+                return const WelcomeScreen();
+              },
+            )));
   }
 }

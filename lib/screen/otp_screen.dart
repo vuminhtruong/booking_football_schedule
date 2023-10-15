@@ -35,7 +35,7 @@ class _OtpScreenState extends State<OtpScreen> {
         if(!context.mounted) {
           return;
         }
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (ctx) => UserInfoScreen(phone: widget.phone)));
+        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) => UserInfoScreen(phone: widget.phone)));
       }
     } on FirebaseAuthException catch (e) {
       if(!context.mounted) {
@@ -90,16 +90,6 @@ class _OtpScreenState extends State<OtpScreen> {
                     vertical: 25, horizontal: 30),
                 child: Column(
                   children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: GestureDetector(
-                        onTap: () => Navigator.of(context).pop(),
-                        child: const Icon(
-                          Icons.arrow_back,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
                     Container(
                       width: 150,
                       height: 150,

@@ -2,6 +2,8 @@ import 'package:booking_football_schedule/screen/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../main.dart';
+
 void showSnackBar(BuildContext context, String content) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
@@ -14,7 +16,7 @@ void showAlertDialog(BuildContext context,String content) {
   Widget okButton = TextButton(
     child: const Text("OK"),
     onPressed: () {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (ctx) => const WelcomeScreen()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (ctx) => const App()));
     },
   );
 
@@ -45,6 +47,7 @@ Widget textField({
   required IconData icon,
   required TextInputType inputType,
   required int maxLines,
+  required int? maxLength,
   required TextEditingController? controller,
   required bool enable,
   required bool obscureText,
@@ -55,6 +58,7 @@ Widget textField({
     padding: const EdgeInsets.only(bottom: 20),
     child: TextFormField(
       initialValue: initialValue,
+      maxLength: maxLength,
       obscureText: obscureText,
       validator: validator,
       style: const TextStyle(

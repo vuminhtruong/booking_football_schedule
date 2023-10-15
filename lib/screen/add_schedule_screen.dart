@@ -41,7 +41,7 @@ class _AddScheduleScreenState extends State<AddScheduleScreen> {
 
     for (var userInfo in user.providerData) {
       if (userInfo.providerId == "phone") {
-        phone = user.phoneNumber;
+        phone = user.phoneNumber!.replaceAll('+84', '0');
       } else if (userInfo.providerId == "password") {
         phone = user.email!.split('@')[0];
       }
@@ -139,7 +139,7 @@ class _AddScheduleScreenState extends State<AddScheduleScreen> {
                 } else {
                   updateMatchHelper.updateMatch(
                       DateFormat('yyyy-MM-dd').format(widget.date), widget.time,
-                      matchEmpty, _teamController.text);
+                      matchEmpty, _teamController.text,phone!);
                   Navigator.of(context).pop();
                 }
               }),

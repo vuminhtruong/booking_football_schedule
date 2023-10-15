@@ -1,4 +1,3 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:booking_football_schedule/screen/add_schedule_screen.dart';
 import 'package:booking_football_schedule/utils/utils.dart';
 import 'package:flutter/material.dart';

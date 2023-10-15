@@ -35,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
       if(!context.mounted) {
         return;
       }
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (ctx) => const MainScreen()));
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) => const MainScreen()));
     } on FirebaseAuthException catch (error) {
       if (!context.mounted) {
         return;

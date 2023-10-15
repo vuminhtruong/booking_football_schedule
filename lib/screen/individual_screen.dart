@@ -32,7 +32,7 @@ class _IndividualScreenState extends State<IndividualScreen> {
 
     for (var userInfo in user.providerData) {
       if (userInfo.providerId == "phone") {
-        _phone = user.phoneNumber;
+        _phone = user.phoneNumber!.replaceAll('+84', '0');
       } else if (userInfo.providerId == "password") {
         _phone = user.email!.split('@')[0];
       }

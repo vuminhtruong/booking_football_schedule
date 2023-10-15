@@ -25,7 +25,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     await auth.verifyPhoneNumber(
       //phoneNumber: phoneNumber,
-      phoneNumber: '+1 650-650-1234',
+      phoneNumber: '+84967057664',
       verificationCompleted: (PhoneAuthCredential credential) async {
         await auth.signInWithCredential(credential);
       },
@@ -39,12 +39,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
           verificationId: verificationId,
           smsCode: smsCode,
         );
-        Navigator.pushReplacement(
-            context,
+        Navigator.of(context).pushReplacement(
             MaterialPageRoute(
                 builder: (ctx) => OtpScreen(
                       // phone: phoneNumber,
-                      phone: '06506501234',
+                      phone: phoneNumber.replaceAll('+84', '0'),
                       verificationId: verificationId,
                     )));
       },
