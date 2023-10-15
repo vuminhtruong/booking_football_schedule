@@ -1,4 +1,5 @@
 import 'package:booking_football_schedule/models/player_model.dart';
+import 'package:booking_football_schedule/screen/player_details_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -180,6 +181,9 @@ class _PlayerPageState extends State<PlayerPage> {
                         margin: const EdgeInsets.symmetric(vertical: 8),
                         elevation: 6,
                         child: ListTile(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => PlayerDetailScreen(playerData: playerDataList[index])));
+                          },
                           leading: playerDataList[index].image != null
                               ? ClipOval(
                               child: Image.network(

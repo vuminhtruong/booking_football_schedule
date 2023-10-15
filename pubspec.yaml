@@ -50,6 +50,7 @@ dependencies:
   google_nav_bar: ^5.0.6
   date_picker_timeline: ^1.2.5
   animated_text_kit: ^4.2.2
+  avatar_glow: ^2.0.2
 
 dev_dependencies:
   flutter_test:
@@ -89,6 +90,10 @@ flutter:
     - assets/images/profile.png
     - assets/images/cup.png
     - assets/images/cup2.png
+    - assets/images/football-shoes.png
+    - assets/images/defence.png
+    - assets/images/goalie.png
+    - assets/images/ball.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
