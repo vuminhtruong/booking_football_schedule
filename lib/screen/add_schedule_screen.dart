@@ -35,17 +35,9 @@ class _AddScheduleScreenState extends State<AddScheduleScreen> {
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser!;
-    late String? phone;
+    String? phone = user.email!.split('@')[0];
     final UpdateMatchHelper updateMatchHelper = UpdateMatchHelper();
     final bool matchEmpty = widget.team1!.isEmpty ? true : false;
-
-    for (var userInfo in user.providerData) {
-      if (userInfo.providerId == "phone") {
-        phone = user.phoneNumber!.replaceAll('+84', '0');
-      } else if (userInfo.providerId == "password") {
-        phone = user.email!.split('@')[0];
-      }
-    }
 
     return Scaffold(
       appBar: AppBar(

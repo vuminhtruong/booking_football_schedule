@@ -29,14 +29,7 @@ class _IndividualScreenState extends State<IndividualScreen> {
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser!;
-
-    for (var userInfo in user.providerData) {
-      if (userInfo.providerId == "phone") {
-        _phone = user.phoneNumber!.replaceAll('+84', '0');
-      } else if (userInfo.providerId == "password") {
-        _phone = user.email!.split('@')[0];
-      }
-    }
+    _phone = user.email!.split('@')[0];
 
     return Scaffold(
       appBar: AppBar(

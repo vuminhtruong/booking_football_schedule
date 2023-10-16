@@ -54,7 +54,7 @@ class PlayerDetailScreen extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.all(24),
         child: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -121,21 +121,21 @@ class PlayerDetailScreen extends StatelessWidget {
               ),
               Text(
                 'Tuổi: ${playerData.age}',
-                style: const TextStyle(fontSize: 22),
+                style: const TextStyle(fontSize: 22,fontWeight: FontWeight.bold),
               ),
               const SizedBox(
                 height: 4,
               ),
               Text(
                 'CLB: ${playerData.team.join(', ')}',
-                style: const TextStyle(fontSize: 22),
+                style: const TextStyle(fontSize: 20),
               ),
               const SizedBox(
                 height: 4,
               ),
               Text(
                 'Vị trí: ${playerData.position.join(', ')}',
-                style: const TextStyle(fontSize: 22),
+                style: const TextStyle(fontSize: 20),
               ),
               const SizedBox(
                 height: 12,
@@ -151,35 +151,35 @@ class PlayerDetailScreen extends StatelessWidget {
               ),
               Text(
                 'Số trận: ${playerData.match}',
-                style: const TextStyle(fontSize: 22),
+                style: const TextStyle(fontSize: 22,fontWeight: FontWeight.bold),
               ),
               const SizedBox(
                 height: 4,
               ),
               Text(
                 'Bàn thắng: ${playerData.goal}',
-                style: const TextStyle(fontSize: 22),
+                style: const TextStyle(fontSize: 20),
               ),
               const SizedBox(
                 height: 4,
               ),
               Text(
                 'Kiến tạo: ${playerData.assist}',
-                style: const TextStyle(fontSize: 22),
+                style: const TextStyle(fontSize: 20),
               ),
               const SizedBox(
                 height: 4,
               ),
               Text(
                 'Đánh chặn: ${playerData.tackle}',
-                style: const TextStyle(fontSize: 22),
+                style: const TextStyle(fontSize: 20),
               ),
               const SizedBox(
                 height: 4,
               ),
               Text(
                 'Cản phá: ${playerData.save}',
-                style: const TextStyle(fontSize: 22),
+                style: const TextStyle(fontSize: 20),
               ),
             ],
           ),

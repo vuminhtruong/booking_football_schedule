@@ -1,5 +1,5 @@
 import 'package:booking_football_schedule/page/booking_page.dart';
-import 'package:booking_football_schedule/page/chat_page.dart';
+import 'package:booking_football_schedule/page/potm_page.dart';
 import 'package:booking_football_schedule/page/home_page.dart';
 import 'package:booking_football_schedule/page/player_page.dart';
 import 'package:booking_football_schedule/screen/profile_screen.dart';
@@ -17,8 +17,8 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _currentPageIndex = 0;
-  final List<String> _textOptions = ['Trang chủ','Đặt lịch','Cầu thủ','Trò chuyện'];
-  final List<Widget> _widgetOptions = const [HomePage(),BookingPage(),PlayerPage(),ChatPage()];
+  final List<String> _textOptions = ['Trang chủ','Đặt lịch','Cầu thủ','POTM'];
+  final List<Widget> _widgetOptions = const [HomePage(),BookingPage(),PlayerPage(),POTMPage()];
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +74,7 @@ class _MainScreenState extends State<MainScreen> {
               text: _textOptions[2],
             ),
             GButton(
-              icon: Icons.chat,
+              icon: Icons.how_to_vote,
               text: _textOptions[3],
             )
           ],
