@@ -1,7 +1,7 @@
 import 'package:booking_football_schedule/page/booking_page.dart';
-import 'package:booking_football_schedule/page/potm_page.dart';
 import 'package:booking_football_schedule/page/home_page.dart';
 import 'package:booking_football_schedule/page/player_page.dart';
+import 'package:booking_football_schedule/page/potm_page.dart';
 import 'package:booking_football_schedule/screen/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -18,7 +18,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _currentPageIndex = 0;
   final List<String> _textOptions = ['Trang chủ','Đặt lịch','Cầu thủ','POTM'];
-  final List<Widget> _widgetOptions = const [HomePage(),BookingPage(),PlayerPage(),POTMPage()];
+  final List<Widget> _widgetOptions = const [HomePage(),BookingPage(),PlayerPage(),PotmPage()];
 
   @override
   Widget build(BuildContext context) {

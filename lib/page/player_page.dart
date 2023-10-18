@@ -16,7 +16,7 @@ class _PlayerPageState extends State<PlayerPage> {
   int selectedButtonIndex = 0;
   String selectedField = 'goal';
   List<String> listField = ['goal', 'assist', 'tackle', 'save'];
-  List<String> images = ['ball','football-shoes','defence','goalie'];
+  List<String> images = ['ball', 'football-shoes', 'defence', 'goalie'];
 
   void selectButton(int index) async {
     setState(() {
@@ -98,16 +98,17 @@ class _PlayerPageState extends State<PlayerPage> {
             child: StreamBuilder(
                 stream: selectedButtonIndex != 3
                     ? FirebaseFirestore.instance
-                    .collection('players')
-                    .orderBy(selectedField, descending: false)
-                    .snapshots()
+                        .collection('players')
+                        .orderBy(selectedField, descending: false)
+                        .snapshots()
                     : FirebaseFirestore.instance
-                    .collection('players')
-                    .where('position', arrayContains: 'Thủ môn')
-                    .orderBy(selectedField, descending: false)
-                    .snapshots(),
+                        .collection('players')
+                        .where('position', arrayContains: 'Thủ môn')
+                        .orderBy(selectedField, descending: false)
+                        .snapshots(),
                 builder: (ctx, playersSnapshots) {
-                  if (playersSnapshots.connectionState == ConnectionState.waiting) {
+                  if (playersSnapshots.connectionState ==
+                      ConnectionState.waiting) {
                     return const Center(
                       child: CircularProgressIndicator(),
                     );
@@ -127,9 +128,8 @@ class _PlayerPageState extends State<PlayerPage> {
                     );
                   }
 
-
                   List<PlayerData> playerDataList =
-                  playersSnapshots.data!.docs.map((snapshot) {
+                      playersSnapshots.data!.docs.map((snapshot) {
                     Map<String, dynamic> data = snapshot.data();
                     String name = data['name'];
                     List<String> position = List<String>.from(data['position']);
@@ -182,30 +182,37 @@ class _PlayerPageState extends State<PlayerPage> {
                         elevation: 6,
                         child: ListTile(
                           onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => PlayerDetailScreen(playerData: playerDataList[index])));
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (ctx) => PlayerDetailScreen(
+                                    playerData: playerDataList[index])));
                           },
                           leading: playerDataList[index].image != null
                               ? ClipOval(
-                              child: Image.network(
-                                playerDataList[index].image!,
-                                width: 50,
-                                height: 50,
-                                fit: BoxFit.cover,
-                              ))
+                                  child: Image.network(
+                                  playerDataList[index].image!,
+                                  width: 50,
+                                  height: 50,
+                                  fit: BoxFit.cover,
+                                ))
                               : ClipOval(
-                              child: Image.asset(
-                                'assets/images/profile.png',
-                                width: 50,
-                                height: 50,
-                                fit: BoxFit.cover,
-                              )),
-                          title: Text(playerDataList[index].name,style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+                                  child: Image.asset(
+                                  'assets/images/profile.png',
+                                  width: 50,
+                                  height: 50,
+                                  fit: BoxFit.cover,
+                                )),
+                          title: Text(
+                            playerDataList[index].name,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 20),
+                          ),
                           subtitle: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                   'Vị trí: ${playerDataList[index].position[0]}'),
-                              Text('Đội bóng: ${playerDataList[index].team[0]}'),
+                              Text(
+                                  'Đội bóng: ${playerDataList[index].team[0]}'),
                             ],
                           ),
                           trailing: SizedBox(
@@ -213,9 +220,16 @@ class _PlayerPageState extends State<PlayerPage> {
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Text(target.toString(), style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 20)),
+                                Text(target.toString(),
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20)),
                                 const SizedBox(width: 6),
-                                Image.asset('assets/images/${images[selectedButtonIndex]}.png',width: 20,height: 20,),
+                                Image.asset(
+                                  'assets/images/${images[selectedButtonIndex]}.png',
+                                  width: 20,
+                                  height: 20,
+                                ),
                               ],
                             ),
                           ),
