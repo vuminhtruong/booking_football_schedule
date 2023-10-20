@@ -27,6 +27,12 @@ class _IndividualScreenState extends State<IndividualScreen> {
   bool isAgreed = false;
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser!;
     _phone = user.email!.split('@')[0];
@@ -43,14 +49,6 @@ class _IndividualScreenState extends State<IndividualScreen> {
         ),
         elevation: 0.0,
         backgroundColor: Colors.black,
-        actions: [
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.person,
-                color: Colors.white,
-              ))
-        ],
       ),
       body: Container(
         margin: const EdgeInsets.only(top: 12),

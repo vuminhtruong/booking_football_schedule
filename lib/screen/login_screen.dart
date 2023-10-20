@@ -10,7 +10,9 @@ import '../widget/custom_button.dart';
 final _firebaseAuth = FirebaseAuth.instance;
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  const LoginScreen({super.key, required this.is_Auth});
+
+  final bool is_Auth;
 
   @override
   State<StatefulWidget> createState() {
@@ -192,28 +194,33 @@ class _LoginScreenState extends State<LoginScreen> {
                       onPressed: _login,
                     ),
                   ),
-                  const SizedBox(height: 10),
-                  const Text(
-                    "Chưa có tài khoản?",
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white70,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      backgroundColor: Colors.transparent,
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: const Text(
-                      'Đăng ký',
-                      style: TextStyle(fontSize: 18),
-                    ),
-                  ),
+                  if(!widget.is_Auth)
+                  Column(
+                    children: [
+                      const SizedBox(height: 10),
+                      const Text(
+                        "Chưa có tài khoản?",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white70,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      TextButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: Colors.transparent,
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text(
+                          'Đăng ký',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
+                    ],
+                  )
                 ],
               )),
             ),

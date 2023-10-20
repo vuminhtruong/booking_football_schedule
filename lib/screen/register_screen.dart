@@ -24,8 +24,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     FirebaseAuth auth = FirebaseAuth.instance;
 
     await auth.verifyPhoneNumber(
-      //phoneNumber: phoneNumber,
-      phoneNumber: '+84967057664',
+      phoneNumber: phoneNumber,
       verificationCompleted: (PhoneAuthCredential credential) async {
         await auth.signInWithCredential(credential);
       },
@@ -180,7 +179,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (ctx) => const LoginScreen()));
+                          builder: (ctx) => const LoginScreen(is_Auth: false)));
                     },
                     child: const Text(
                       'Đăng nhập',

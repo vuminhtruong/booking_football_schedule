@@ -4,24 +4,36 @@ import 'package:booking_football_schedule/page/player_page.dart';
 import 'package:booking_football_schedule/page/potm_page.dart';
 import 'package:booking_football_schedule/screen/profile_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
-class MainScreen extends StatefulWidget {
+import '../provider/user_provider.dart';
+
+class MainScreen extends ConsumerStatefulWidget {
   const MainScreen({super.key});
 
   @override
-  State<MainScreen> createState() {
+  ConsumerState<MainScreen> createState() {
     return _MainScreenState();
   }
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _MainScreenState extends ConsumerState<MainScreen> {
   int _currentPageIndex = 0;
   final List<String> _textOptions = ['Trang chủ','Đặt lịch','Cầu thủ','POTM'];
   final List<Widget> _widgetOptions = const [HomePage(),BookingPage(),PlayerPage(),PotmPage()];
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    ref.read(userProvider.notifier).loadUser();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final user = ref.watch(userProvider);
+
     return WillPopScope(child: Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -32,15 +44,22 @@ class _MainScreenState extends State<MainScreen> {
           style: const TextStyle(color: Colors.white),
         ),
         actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => const ProfileScreen()));
-              },
-              icon: const Icon(
-                Icons.person,
-                color: Colors.white,
-              )
-          )
+          InkWell(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => const ProfileScreen()));
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal:12,vertical: 4),
+              child: CircleAvatar(
+                backgroundColor: Colors.grey,
+                radius: 20,
+                child: CircleAvatar(
+                  backgroundImage: NetworkImage(user.image),
+                  radius: 18,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
       body: _widgetOptions[_currentPageIndex],

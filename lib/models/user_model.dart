@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class User {
+class UserModel {
   String name;
   String image;
   String phone;
   String? address;
-  Timestamp? birthday;
+  String? birthday;
 
-  User(
+  UserModel(
     this.address,
     this.birthday, {
     required this.name,

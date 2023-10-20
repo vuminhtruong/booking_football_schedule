@@ -1,20 +1,50 @@
 import 'package:booking_football_schedule/main.dart';
 import 'package:booking_football_schedule/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
-class ProfileScreen extends StatefulWidget {
+import '../provider/user_provider.dart';
+
+class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({super.key});
 
   @override
-  State<StatefulWidget> createState() {
+  ConsumerState<ProfileScreen> createState() {
     return _ProfileScreenState();
   }
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _ProfileScreenState extends ConsumerState<ProfileScreen> {
+  final TextEditingController _dateController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+  late String userImage;
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _dateController.dispose();
+    _addressController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    ref.read(userProvider.notifier).loadUser();
+    final user = ref.watch(userProvider);
+    userImage = user.image;
+
+    if (user.birthday != null) {
+      _dateController.text = user.birthday!;
+    }
+
+    if (user.address != null) {
+      _addressController.text = user.address!;
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -36,17 +66,44 @@ class _ProfileScreenState extends State<ProfileScreen> {
             children: [
               Stack(
                 children: [
-                  SizedBox(
-                    width: 180,
-                    height: 180,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(100),
-                      child: Image.asset('assets/images/profile.png'),
-                    ),
+                  // SizedBox(
+                  //   width: 180,
+                  //   height: 180,
+                  //   child: ClipRRect(
+                  //     borderRadius: BorderRadius.circular(180),
+                  //     child: Image.network(user.image),
+                  //   ),
+                  // ),
+                  CircleAvatar(
+                    backgroundImage: NetworkImage(user.image),
+                    radius: 110,
                   ),
                   Positioned(
-                      bottom: 20,
-                      right: 20,
+                    bottom: 20,
+                    right: 20,
+                    child: GestureDetector(
+                      onTap: () async {
+                        final pickedImage = await ImagePicker()
+                            .pickImage(source: ImageSource.gallery);
+
+                        if (pickedImage == null) {
+                          return;
+                        }
+
+                        final storageRef = FirebaseStorage.instance
+                            .ref()
+                            .child('user_images')
+                            .child(
+                                '${FirebaseAuth.instance.currentUser!.uid}.jpg');
+                        await storageRef.putFile(File(pickedImage.path));
+                        final imageUrl = await storageRef.getDownloadURL();
+
+                        ref.read(userProvider.notifier).updateImage(imageUrl);
+
+                        setState(() {
+                          userImage = imageUrl;
+                        });
+                      },
                       child: Container(
                         width: 40,
                         height: 40,
@@ -58,7 +115,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           color: Colors.black,
                           size: 20,
                         ),
-                      ))
+                      ),
+                    ),
+                  ),
                 ],
               ),
               const SizedBox(
@@ -68,6 +127,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: Column(
                 children: [
                   TextFormField(
+                    initialValue: user.name,
+                    enabled: false,
                     decoration: InputDecoration(
                         label: const Text('Họ và Tên'),
                         prefixIcon: const Icon(Icons.account_box),
@@ -86,6 +147,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     height: 10,
                   ),
                   TextFormField(
+                    initialValue: user.phone,
+                    enabled: false,
                     decoration: InputDecoration(
                         label: const Text('Số điện thoại'),
                         prefixIcon: const Icon(Icons.phone_iphone),
@@ -104,6 +167,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     height: 10,
                   ),
                   TextFormField(
+                    controller: _dateController,
+                    enabled: user.birthday == null,
+                    keyboardType: TextInputType.none,
+                    onTap: () async {
+                      DateTime? newDate = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime(1999, 05, 31),
+                          firstDate: DateTime(1970, 01, 01),
+                          lastDate: DateTime(2015, 12, 31));
+
+                      if (newDate == null) {
+                        return;
+                      }
+                      setState(() {
+                        _dateController.text = newDate.toString().split(" ")[0];
+                      });
+                    },
                     decoration: InputDecoration(
                         label: const Text('Ngày tháng năm sinh'),
                         prefixIcon: const Icon(Icons.calendar_month),
@@ -122,6 +202,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     height: 10,
                   ),
                   TextFormField(
+                    controller: _addressController,
+                    enabled: user.address == null,
                     decoration: InputDecoration(
                         label: const Text('Địa chỉ'),
                         prefixIcon: const Icon(Icons.map),
@@ -139,11 +221,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   const SizedBox(
                     height: 20,
                   ),
+                  if(user.birthday == null || user.address == null)
                   SizedBox(
                     height: 50,
                     width: 200,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        ref.read(userProvider.notifier).updateUser(
+                            _dateController.text, _addressController.text);
+                        Navigator.of(context).pop();
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.amberAccent,
                         side: BorderSide.none,
@@ -156,7 +243,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   InkWell(
                     onTap: () async {
@@ -197,7 +284,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                       ],
                     ),
-                  )
+                  ),
                 ],
               )),
             ],

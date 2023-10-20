@@ -72,7 +72,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
         return;
       }
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (ctx) => const LoginScreen()));
+          MaterialPageRoute(builder: (ctx) => const LoginScreen(is_Auth: true,)));
     } on FirebaseAuthException catch (error) {
       if (error.code == 'email-already-in-use') {
         showAlertDialog(
