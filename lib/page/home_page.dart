@@ -1,3 +1,4 @@
+import 'package:booking_football_schedule/widget/weather.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -60,6 +61,17 @@ class _HomePage extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
+                    "Thời tiết",
+                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const WeatherWidget(),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Text(
                     "Tin nổi bật",
                     style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
                   ),
@@ -82,7 +94,7 @@ class _HomePage extends State<HomePage> {
                     ),
                   ),
                   const SizedBox(
-                    height: 40,
+                    height: 20,
                   ),
                   const Text(
                     'Tin bên lề',

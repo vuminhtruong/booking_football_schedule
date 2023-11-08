@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "454663992177",
+    "firebase_url": "https://main-app-e9209-default-rtdb.firebaseio.com",
     "project_id": "main-app-e9209",
     "storage_bucket": "main-app-e9209.appspot.com"
   },
@@ -26,12 +27,21 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:454663992177:android:5955db6be3af5c215ebcd0",
+        "mobilesdk_app_id": "1:454663992177:android:41981a113d8953b75ebcd0",
         "android_client_info": {
-          "package_name": "com.example.phoneauth"
+          "package_name": "com.mtpt.booking_football_schedule"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "454663992177-8i2bqv1hh3m8tirhn27tcl3ta1jtoedo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mtpt.booking_football_schedule",
+            "certificate_hash": "81a169749c563ad76dc905210ed2bec1476fbc9d"
+          }
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCEmwoqpyGVJFOE1mfSEwIcky51jEdc_RA"

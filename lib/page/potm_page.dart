@@ -7,7 +7,8 @@ class PotmPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final int day = DateTime.now().day;
+    // final int day = DateTime.now().day;
+    const int day = 30;
 
     Widget activeWidget;
 

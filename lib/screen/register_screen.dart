@@ -30,7 +30,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       },
       verificationFailed: (FirebaseAuthException exception) {
         ScaffoldMessenger.of(context).clearSnackBars();
-        showSnackBar(context, 'Lỗi đăng ký,số điện thoại đã được sử dụng hoặc không hợp lệ,vui lòng liên hệ với Admin');
+        // showSnackBar(context, 'Lỗi đăng ký,số điện thoại đã được sử dụng hoặc không hợp lệ,vui lòng liên hệ với Admin');
+        showSnackBar(context, exception.message ?? 'Authentication failed.');
       },
       codeSent: (String verificationId, int? resendToken) async {
         String smsCode = '';
