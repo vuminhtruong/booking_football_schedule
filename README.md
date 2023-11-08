@@ -4,18 +4,25 @@ A project to schedule matches at a local soccer field. This is only a draft of t
 ## App Overview
 
 1. Sign Up
+
    ![register_image](./assets/result/register.png)
 2. Login
+
    ![login_image](./assets/result/login.png)
 3. Verify OTP
+
    ![otp_image](./assets/result/otp.png)
 4. Home Page
+
    ![home_image](./assets/result/home.png)
 5. Booking Page
+
    ![booking_image](./assets/result/booking.png)
 6. Schedule Page
+
    ![schedule_image](./assets/result/schedule.png)
 7. User Info Page
+
    ![user_image](./assets/result/user.png)
 
 ## API Reference
